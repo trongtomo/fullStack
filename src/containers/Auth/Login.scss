@@ -1,75 +1,96 @@
-.login-background{
-    background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
-    font-family: "work sans";
-    height: 100vh;
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+.login-background {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  font-family: "work sans";
+  height: 100vh;
 
-.login-container{
+  .login-container {
     border-radius: 10px;
     margin: auto;
     width: 400px;
-    height:450px;
-    top:0;
+    height: 450px;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
     position: absolute;
-   background-color: white;
-   .login-content{
-    padding:10px;
-    .text-login{
+    background-color: white;
+    .login-content {
+      padding: 10px;
+      .text-login {
         text-align: center;
         font-weight: 600;
         font-size: 24px;
         padding-top: 10px;
-    }
-    .login-input{
+      }
+      .login-input {
         margin: 7px 0;
-    }
-    .btn-login{
+        .custom-input-password {
+          position: relative;
+          i {
+            position: absolute;
+            right: 5px;
+            top: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+      .btn-login {
         font-size: 18px;
         color: white;
         width: 100%;
-        margin:10px 0;
+        margin: 10px 0;
         height: 35px;
         border-radius: 15px;
         outline: none;
         border: none;
-        background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
-    }
-    .forgot-password{
-        font-size:12px;
-    }
-    .social-login{
+        background: linear-gradient(
+          135deg,
+          rgba(34, 193, 195, 1) 0%,
+          rgba(253, 187, 45, 1) 100%
+        );
+      }
+      .forgot-password {
+        font-size: 12px;
+      }
+      .social-login {
         display: flex;
         text-align: center;
         justify-content: center;
         margin-top: 10px;
 
-       .google{
-           font-size: 30px;
-           background: #c32424;
-           border-radius: 50%;
-           height: 50px;
-           width: 50px;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           color: white;
-           margin-right: 10px;
-       }
-       .facebook{
-        font-size: 30px;
-        background: #307aaf;
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-       }
+        .google {
+          font-size: 30px;
+          background: #c32424;
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          margin-right: 10px;
+        }
+        .facebook {
+          font-size: 30px;
+          background: #307aaf;
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+      }
     }
-   }
-}
+  }
 }
