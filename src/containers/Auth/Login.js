@@ -7,7 +7,7 @@ import * as actions from "../../store/actions";
 
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
-
+import { handleLoginApi } from "../../services/userService";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +15,7 @@ class Login extends Component {
       username: "trong",
       password: "trong",
       isShowPassword: false,
+      errMessage: "",
     };
   }
   handleOnChangeInputUsername = (event) => {
@@ -27,9 +28,30 @@ class Login extends Component {
       password: event.target.value,
     });
   };
-  handleLogin = () => {
-    console.log(this.state.username, this.state.password);
-    console.log("all state:", this.state);
+  handleLogin = async () => {
+    this.setState({
+      errMessage: "",
+    });
+    try {
+      let data = await handleLoginApi(this.state.username, this.state.password);
+      if (data && data.errCode !== 0) {
+        this.setState({
+          errMessage: data.message,
+        });
+      }
+      if (data && data.errCode === 0) {
+        this.props.userLoginSuccess(data.user);
+        console.log("login success");
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data) {
+          this.setState({
+            errMessage: error.response.data.message,
+          });
+        }
+      }
+    }
   };
   handleShowHidePassword = () => {
     this.setState({
@@ -43,11 +65,11 @@ class Login extends Component {
           <div className="login-content row">
             <div className="col-12 text-login">Login</div>
             <div className="col-12 form group login-input">
-              <label>Username</label>
+              <label>Email</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your username"
+                placeholder="Enter your email"
                 onChange={(event) => this.handleOnChangeInputUsername(event)}
               ></input>
             </div>
@@ -75,6 +97,9 @@ class Login extends Component {
                   ></i>
                 </span>
               </div>
+            </div>
+            <div className="col-12" style={{ color: "red" }}>
+              {this.state.errMessage}
             </div>
             <div className="col-12">
               <button onClick={() => this.handleLogin()} className="btn-login">
@@ -107,9 +132,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 
