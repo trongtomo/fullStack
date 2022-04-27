@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
-import { getAllUser } from "../../services/userService";
+import { getAllUser, createNewUser } from "../../services/userService";
 import ModalUser from "./ModalUser";
 class UserManage extends Component {
   constructor(props) {
@@ -14,13 +14,31 @@ class UserManage extends Component {
   }
 
   async componentDidMount() {
+    await this.getAllUserFromReact();
+  }
+  getAllUserFromReact = async () => {
     let response = await getAllUser("ALL");
     if (response && response.errCode === 0) {
       this.setState({
         arrUsers: response.users,
       });
     }
-  }
+  };
+  createNewUser = async (data) => {
+    try {
+      let response = await createNewUser(data);
+      if (response && response.errCode !== 0) {
+        alert(response.errMessage);
+      } else {
+        await this.getAllUserFromReact();
+        this.setState({
+          isOpenModalUser: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   handleAddNewUser = () => {
     this.setState({
       isOpenModalUser: true,
@@ -39,6 +57,7 @@ class UserManage extends Component {
         <ModalUser
           toggleFromParent={this.toggleModelUser}
           isOpen={this.state.isOpenModalUser}
+          createNewUser={this.createNewUser}
         />
         <div className="title text-center">Manage users with trong</div>
         <div className="mx-1">

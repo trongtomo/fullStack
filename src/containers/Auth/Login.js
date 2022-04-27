@@ -89,7 +89,7 @@ class Login extends Component {
                 >
                   {" "}
                   <i
-                    class={
+                    className={
                       this.state.isShowPassword
                         ? "fa-solid fa-eye-slash"
                         : "fa-solid fa-eye"
