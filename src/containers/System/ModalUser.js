@@ -2,17 +2,31 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { emitter } from "../../utils//emitter";
 class ModalUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      pasword: "",
+      password: "",
       firstName: "",
       lastName: "",
       address: "",
       phonenumber: "",
     };
+    this.listenToEmitter();
+  }
+  listenToEmitter() {
+    emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
+      this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phonenumber: "",
+      });
+    });
   }
   handleOnChangeInput = (event, id) => {
     //bad
@@ -54,7 +68,7 @@ class ModalUser extends Component {
   handleAddNewUser = () => {
     let isValid = this.checkValidateInput();
     if (isValid === true) {
-      this.props.createNewUser(this.state);
+      this.props.createNewUser(this.state, "abc");
     }
   };
   componentDidMount() {}
@@ -63,11 +77,16 @@ class ModalUser extends Component {
   };
   render() {
     return (
-      <Modal isOpen={this.props.isOpen} toggle={() => this.toggle()} size="lg">
+      <Modal
+        isOpen={this.props.isOpen}
+        toggle={() => this.toggle()}
+        size="lg"
+        className={"modal-user-container"}
+      >
         <ModalHeader toggle={() => this.toggle()}>Create a User</ModalHeader>
         <ModalBody>
-          <div className="container mt-5">
-            <div className="row">
+          <div className="container mt-5 modal-user-body">
+            <div className="row ">
               <div className="col-12 ">Create a new user</div>
               <div className="col-sm-6">
                 <label className="form-label">Email address</label>
@@ -171,10 +190,20 @@ class ModalUser extends Component {
           </div>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={() => this.handleAddNewUser()}>
+          <Button
+            color="primary"
+            className="px-3"
+            onClick={() => this.handleAddNewUser()}
+          >
             Add New
           </Button>{" "}
-          <Button onClick={() => this.toggle()}>Close</Button>
+          <Button
+            color="secondary"
+            className="px-3"
+            onClick={() => this.toggle()}
+          >
+            Close
+          </Button>
         </ModalFooter>
       </Modal>
     );

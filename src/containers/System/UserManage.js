@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
-import { getAllUser, createNewUser } from "../../services/userService";
+import {
+  getAllUser,
+  createNewUser,
+  deleteUser,
+} from "../../services/userService";
+import { emitter } from "../../utils/emitter";
+
 import ModalUser from "./ModalUser";
 class UserManage extends Component {
   constructor(props) {
@@ -34,6 +40,7 @@ class UserManage extends Component {
         this.setState({
           isOpenModalUser: false,
         });
+        emitter.emit("EVENT_CLEAR_MODAL_DATA");
       }
     } catch (error) {
       console.log(error);
@@ -49,7 +56,19 @@ class UserManage extends Component {
       isOpenModalUser: !this.state.isOpenModalUser,
     });
   };
-
+  handleDeleteUser = async (user) => {
+    console.log("delete", user);
+    try {
+      let res = await deleteUser(user.id);
+      if (res && res.errCode === 0) {
+        await this.getAllUserFromReact();
+      } else {
+        alert(res.errMessage);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   render() {
     let arrUsers = this.state.arrUsers;
     return (
@@ -92,7 +111,10 @@ class UserManage extends Component {
                         <button className="btn-edit">
                           <i className="fa-solid fa-pen"></i>
                         </button>
-                        <button className="btn-delete">
+                        <button
+                          onClick={() => this.handleDeleteUser(item)}
+                          className="btn-delete"
+                        >
                           <i className="fa-solid fa-trash"></i>
                         </button>
                       </td>
