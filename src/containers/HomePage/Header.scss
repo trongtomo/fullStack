@@ -46,15 +46,29 @@
       }
       .language-vi {
         cursor: pointer;
+        opacity: 0.1;
         &.active {
-          color: blue;
+          opacity: 1;
+          span {
+            color: red;
+          }
+        }
+        &:hover {
+          opacity: 0.8;
         }
       }
       .language-en {
         margin: 0 10px;
         cursor: pointer;
+        opacity: 0.1;
         &.active {
-          color: orange;
+          opacity: 1;
+          span {
+            color: blue;
+          }
+        }
+        &:hover {
+          opacity: 0.8;
         }
       }
       justify-content: flex-end;
