@@ -2,22 +2,21 @@
   height: 60px;
   width: 100%;
   .home-header-content {
-    width: 100%;
     height: 100%;
     display: flex;
-    padding: 0 20px;
+    padding: 0 40px;
 
     .left-content {
       align-items: center;
       display: flex;
-      width: 25%;
-      border: 1px solid green;
+      width: 20%;
+
       .header-logo {
         width: 100%;
         height: 100%;
-        background: url("../../assets/bookingcarelogo.svg") center center
-          no-repeat;
         cursor: pointer;
+        transform: scale(0.5, 0.5);
+        margin-left: -45px;
       }
       i {
         font-size: 25px;
@@ -29,8 +28,8 @@
       justify-content: space-between;
       align-items: center;
       display: flex;
-      width: 50%;
-      border: 1px solid orange;
+      width: 55%;
+
       .child-content {
         .sub-title {
           font-weight: 400;
@@ -39,11 +38,124 @@
       }
     }
     .right-content {
-      justify-content: center;
+      .support {
+        padding-right: 50px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      .language-vi {
+        cursor: pointer;
+        &.active {
+          color: blue;
+        }
+      }
+      .language-en {
+        margin: 0 10px;
+        cursor: pointer;
+        &.active {
+          color: orange;
+        }
+      }
+      justify-content: flex-end;
       align-items: center;
       display: flex;
       width: 25%;
-      border: 1px solid gray;
+    }
+  }
+}
+.home-header-banner {
+  background-image: url("../../assets/header-background.jpg");
+  height: 485px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  .content-up {
+    background-image: linear-gradient(
+      rgba(126, 126, 126, 0.25),
+      rgba(255, 255, 255, 0.1)
+    );
+    padding-top: 15px;
+
+    height: 65%;
+
+    .title1 {
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 1px 1px 1px #333;
+      color: white;
+      margin-top: 30px;
+    }
+    .title2 {
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 1px 1px 1px #333;
+      color: white;
+      margin-bottom: 15px;
+    }
+    .search {
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 25px;
+      background: #f7d800;
+      i {
+        margin: 0 5px;
+      }
+      input {
+        height: 30px;
+        width: 300px;
+        border: none;
+        outline: none;
+        background: transparent;
+      }
+    }
+  }
+  .content-down {
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 1)
+    );
+    height: 35%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    .options {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      .option-child {
+        width: 100px;
+
+        .icon-child {
+          background: white;
+          width: 40px;
+          height: 40px;
+          padding: 10px;
+          border-radius: 50%;
+          text-align: center;
+          margin: 0 auto;
+        }
+        i {
+          color: #49bce2;
+          font-size: 20px;
+        }
+      }
+      .text-child {
+        font-size: 17px;
+        font-weight: 500;
+        cursor: pointer;
+        &:hover {
+          color: #49bce2;
+        }
+      }
     }
   }
 }
