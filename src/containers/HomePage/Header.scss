@@ -1,6 +1,11 @@
 .home-header-container {
   height: 60px;
   width: 100%;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
   .home-header-content {
     height: 100%;
     display: flex;
@@ -137,6 +142,7 @@
       rgba(255, 255, 255, 1)
     );
     height: 35%;
+    padding-bottom: 10px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
