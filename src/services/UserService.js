@@ -1,6 +1,7 @@
 import db from "../models/index";
 import bcrypt from "bcrypt";
 import { reject } from "bcrypt/promises";
+import res, { type } from "express/lib/response";
 const salt = bcrypt.genSaltSync(10);
 let hashUserPassword = (password) => {
   return new Promise(async (resolve, reject) => {
@@ -182,11 +183,33 @@ let updateUserData = (data) => {
     }
   });
 };
-
+let getAllCode = (typeInput) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!typeInput) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing required parameter",
+        });
+      } else {
+        let res = {};
+        let allcode = await db.Allcode.findAll({
+          where: { type: typeInput },
+        });
+        res.errCode = 0;
+        res.data = allcode;
+        resolve(res);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 module.exports = {
   handleUserLogin: handleUserLogin,
   getAllUsers: getAllUsers,
   createNewUser: createNewUser,
   deleteUser: deleteUser,
   updateUserData: updateUserData,
+  getAllCode: getAllCode,
 };
