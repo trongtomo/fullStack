@@ -49,6 +49,20 @@
                 "handbook":"Cam nang",
                 "manage-handbook":"Quan ly cam nang"
             }
-        }
+     },
+     "manage-user":{
+         "add": "Them moi nguoi dung",
+        "email":"Email",
+        "password":"Mat khau",
+        "firstName":"Ho",
+        "lastName":"Ten",
+        "address":"Dia chi",
+        "phone":"So dien thoai",
+        "gender":"Gioi tinh",
+        "role":"Vi tri",
+        "image":"Hinh dai dien",
+        "submit":"Tao moi"
+     }
     }
+
     
